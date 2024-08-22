@@ -56,7 +56,7 @@ def plot_performance(sizes, times_dict):
 
 
 # Sizes to test
-sizes = [100, 500, 1000, 2000, 4000]
+sizes = [100, 500, 1000]
 
 # Test Quick Sort
 print("Testing Quick Sort")
