@@ -233,24 +233,32 @@ def insertion_sort(bucket):
 		bucket[j + 1] = key
 
 def bucket_sort(arr):
-	n = len(arr)
-	buckets = [[] for _ in range(n)]
+    n = len(arr)
+    if n <= 1:
+        return
 
-	# Put array elements in different buckets
-	for num in arr:
-		bi = int(n * num)
-		buckets[bi].append(num)
+    # Find the maximum value to determine the range of buckets
+    max_val = max(arr)
 
-	# Sort individual buckets using insertion sort
-	for bucket in buckets:
-		insertion_sort(bucket)
+    # Create empty buckets
+    buckets = [[] for _ in range(n)]
 
-	# Concatenate all buckets into arr[]
-	index = 0
-	for bucket in buckets:
-		for num in bucket:
-			arr[index] = num
-			index += 1
+    # Put array elements in different buckets
+    for num in arr:
+        # Use min(num, max_val) to ensure the index is within bounds
+        bi = min(int(n * num / (max_val + 1)), n - 1)
+        buckets[bi].append(num)
+
+    # Sort individual buckets using insertion sort
+    for bucket in buckets:
+        insertion_sort(bucket)
+
+    # Concatenate all buckets into arr[]
+    index = 0
+    for bucket in buckets:
+        for num in bucket:
+            arr[index] = num
+            index += 1
 
 """
 RADIX SORT - https://www.geeksforgeeks.org/radix-sort/
