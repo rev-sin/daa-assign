@@ -1,12 +1,13 @@
 from collections import defaultdict, deque
+from typing import List, Tuple, Set
 
 class SnakesAndLadders:
-    def __init__(self, n, snakes, ladders):
+    def __init__(self, n: int, snakes: List[Tuple[int, int]], ladders: List[Tuple[int, int]]):
         self.n = n
         self.snakes = snakes
         self.ladders = ladders
 
-    def path_exists(self):
+    def path_exists(self) -> bool:
         target = self.n * self.n
         visited = set()
         queue = deque([1])
@@ -34,7 +35,7 @@ class SnakesAndLadders:
 
         return False
 
-    def snakes_ladders_share_start_end(self):
+    def snakes_ladders_share_start_end(self) -> bool:
         snake_starts = set()
         snake_ends = set()
         ladder_starts = set()
@@ -54,9 +55,13 @@ class SnakesAndLadders:
             ladder_starts.add(start)
             ladder_ends.add(end)
 
+        # Ensure no overlap between snakes and ladders
+        if snake_starts & ladder_starts or snake_ends & ladder_ends:
+            return False
+
         return True
 
-    def is_cyc_util(self, adj, u, visited, rec_stack):
+    def is_cyc_util(self, adj: defaultdict, u: int, visited: List[bool], rec_stack: List[bool]) -> bool:
         visited[u] = True
         rec_stack[u] = True
 
@@ -70,7 +75,7 @@ class SnakesAndLadders:
         rec_stack[u] = False
         return False
 
-    def loops_exist(self):
+    def loops_exist(self) -> bool:
         graph = defaultdict(list)
 
         for start, end in self.snakes + self.ladders:
@@ -86,7 +91,7 @@ class SnakesAndLadders:
 
         return False
 
-    def ladder_from_start_to_end(self):
+    def ladder_from_start_to_end(self) -> bool:
         start = 1
         end = self.n * self.n
         for ladder_start, ladder_end in self.ladders:
@@ -94,5 +99,5 @@ class SnakesAndLadders:
                 return True
         return False
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"SnakesAndLadders(n={self.n}, snakes={self.snakes}, ladders={self.ladders})"
