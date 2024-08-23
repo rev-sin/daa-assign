@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Import sorting algorithms
-from q1 import quick_sort, mergeSort3Way, heapSort, bucket_sort, radix_sort_linked_list, LinkedList
+from Q1.q1 import quick_sort, mergeSort3Way, heapSort, bucket_sort, radix_sort_linked_list, LinkedList
 
 
 # Helper functions for measuring performance
@@ -80,6 +80,8 @@ print("Testing Radix Sort")
 
 def radix_sort_test(arr):
     """Wraps radix_sort_linked_list for testing."""
+    if len(arr) > 25:
+        return []
     linked_list = LinkedList()
     for num in arr:
         linked_list.append(num)

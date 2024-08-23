@@ -1,4 +1,4 @@
-from q4 import SnakesAndLadders
+from Q4.q4 import SnakesAndLadders
 
 # Test case 1: No snakes or ladders, path exists from 1 to n^2
 n = 10
