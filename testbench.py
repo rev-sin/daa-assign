@@ -43,7 +43,7 @@ def test_sorting_algorithm(sort_function, sizes):
 def plot_performance(sizes, times_dict):
     """Plots performance results using Seaborn."""
     plt.figure(figsize=(12, 8))
-    sns.set(style="whitegrid")
+    sns.set_theme(style="whitegrid")  # Use set_theme instead of set
     for label, times in times_dict.items():
         plt.plot(sizes, times, marker='o', label=label)
 
